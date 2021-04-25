@@ -32,6 +32,7 @@ import javax.persistence.Table;
 public class Game implements Serializable {
 
   @Id
+  @Column(name = "game_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long gameId;
 
@@ -124,5 +125,15 @@ public class Game implements Serializable {
 
   public void setPrice(Double price) {
     this.price = price;
+  }
+
+  public br.dev.andreferreira.entities.Game toGameResponse() {
+    return br.dev.andreferreira.entities.Game.newBuilder()
+        .setGameId(this.gameId)
+        .setName(this.name)
+        .setDescription(this.description)
+        .setPlatform(this.platform)
+        .setPrice(this.price)
+        .build();
   }
 }

@@ -1,0 +1,29 @@
+version: "3.5"
+
+networks:
+  net-grpc:
+    name: net-grpc
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.9.0.0/24
+
+services:
+  postgresql-schedulings:
+    labels:
+      br.dev.andreferreira.author: "Andre Ferreira <andre.dev.linux@gmail.com>"
+      br.dev.andreferreira.description: "Database PostgreSQL Server 13.1 Alpine - gRPC Server"
+    hostname: postgresql.grpc.server
+    build:
+      context: ./postgresql
+      dockerfile: Dockerfile
+    env_file:
+      - ./postgresql/.env
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    networks:
+      net-grpc:
+        ipv4_address: "10.9.0.254"

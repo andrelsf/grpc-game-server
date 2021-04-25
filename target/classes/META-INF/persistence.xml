@@ -14,7 +14,7 @@
       <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
       <property name="hibernate.connection.username" value="game" />
       <property name="hibernate.connection.password" value="g4m3" />
-      <property name="hibernate.connection.url" value="jdbc:postgresql://postgresql.games:5432/games" />
+      <property name="hibernate.connection.url" value="jdbc:postgresql://postgresql.grpc.server:5432/games_dev" />
 
       <!-- Database-specific dialect -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />

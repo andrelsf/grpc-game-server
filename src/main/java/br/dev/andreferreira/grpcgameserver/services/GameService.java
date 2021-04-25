@@ -10,7 +10,10 @@ import br.dev.andreferreira.services.GameServiceGrpc.GameServiceImplBase;
 import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GameService extends GameServiceImplBase {
 
@@ -34,24 +37,14 @@ public class GameService extends GameServiceImplBase {
       return;
     }
 
-    responseObserver.onNext(GameResponse.newBuilder()
-        .addGame(
-            br.dev.andreferreira.entities.Game.newBuilder()
-                .setGameId(2L)
-                .setName("The Witcher Wild Hunt")
-                .setDescription("Geralt of the Rivia a witcher")
-                .setPlatform(PS4)
-                .setPrice(199.9)
-                .build()
-        ).addGame(
-            br.dev.andreferreira.entities.Game.newBuilder()
-                .setGameId(1L)
-                .setName("God of War")
-                .setDescription("Kratos the God of War")
-                .setPlatform(Platform.PS4)
-                .setPrice(199.9)
-                .build()
-        ).build());
+    List<br.dev.andreferreira.entities.Game> listGames = new ArrayList<>();
+    games.forEach(game -> {
+      listGames.add(game.toGameResponse());
+    });
+
+    GameResponse gamesResponse = GameResponse.newBuilder().addAllGame(listGames).build();
+
+    responseObserver.onNext(gamesResponse);
     responseObserver.onCompleted();
   }
 }
