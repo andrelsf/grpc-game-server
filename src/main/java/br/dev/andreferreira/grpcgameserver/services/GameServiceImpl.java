@@ -33,4 +33,15 @@ public class GameServiceImpl {
     Optional<Game> game = repository.findById(gameId);
     return game;
   }
+
+  public Optional<Game> deleteById(long gameId) {
+    Optional<Game> game = repository.findById(gameId);
+
+    if (game.isPresent()) {
+      repository.delete(game.get());
+      return game;
+    }
+
+    return game;
+  }
 }

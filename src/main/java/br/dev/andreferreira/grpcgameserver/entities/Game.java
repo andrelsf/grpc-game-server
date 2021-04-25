@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "Game.findAll",
-        query = "SELECT g FROM Game g ORDER BY g.gameId DESC"
+        query = "SELECT g FROM Game g ORDER BY g.gameId ASC"
     ),
     @NamedQuery(
         name = "Game.findById",

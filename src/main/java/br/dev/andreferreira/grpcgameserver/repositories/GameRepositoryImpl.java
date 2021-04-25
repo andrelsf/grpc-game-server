@@ -41,4 +41,21 @@ public class GameRepositoryImpl implements  GameRepository {
     return Optional.ofNullable(DBConnection.getEntityManager().find(Game.class, gameId));
   }
 
+  @Override
+  public void delete(Game game) {
+    try {
+      DBConnection.beginTransaction();
+      DBConnection.getEntityManager().remove(game);
+      DBConnection.commit();
+    } catch (RuntimeException ex) {
+      if (DBConnection.getEntityManager() != null && DBConnection.getEntityManager().isOpen()) {
+        DBConnection.rollback();
+      }
+
+      throw ex;
+    } finally {
+      DBConnection.closeEntityManager();
+    }
+  }
+
 }

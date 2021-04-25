@@ -2,10 +2,12 @@ package br.dev.andreferreira.grpcgameserver.services;
 
 import br.dev.andreferreira.grpcgameserver.entities.Game;
 import br.dev.andreferreira.grpcgameserver.exceptions.GameNotFoundException;
+import br.dev.andreferreira.services.GameDeletedResponse;
 import br.dev.andreferreira.services.GameRequest;
 import br.dev.andreferreira.services.GameRequestById;
 import br.dev.andreferreira.services.GameResponse;
 import br.dev.andreferreira.services.GameServiceGrpc.GameServiceImplBase;
+import br.dev.andreferreira.services.StatusResponse;
 import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
@@ -70,6 +72,29 @@ public class GameService extends GameServiceImplBase {
     }
 
     responseObserver.onNext(game.get().toGameResponse());
+    responseObserver.onCompleted();
+  }
+
+  @Override
+  public void deleteById(GameRequestById request,
+      StreamObserver<GameDeletedResponse> responseObserver) {
+    Optional<Game> game = service.deleteById(request.getGameId());
+
+    if (game.isEmpty()) {
+      String message = String.format("Game not found by id %s", request.getGameId());
+      responseObserver.onError(
+          Status.NOT_FOUND
+              .withDescription(message)
+              .withCause(new GameNotFoundException(message))
+              .asRuntimeException());
+      return;
+    }
+
+    responseObserver.onNext(
+        GameDeletedResponse.newBuilder()
+        .setGameId(request.getGameId())
+        .setStatus(StatusResponse.SUCCESS)
+        .build());
     responseObserver.onCompleted();
   }
 }

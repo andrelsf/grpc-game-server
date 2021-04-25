@@ -11,4 +11,6 @@ public interface GameRepository {
   Game save(Game game);
 
   Optional<Game> findById(long gameId);
+
+  void delete(Game game);
 }
