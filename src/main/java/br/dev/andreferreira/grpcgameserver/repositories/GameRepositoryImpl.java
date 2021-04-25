@@ -1,16 +1,16 @@
 package br.dev.andreferreira.grpcgameserver.repositories;
 
 import br.dev.andreferreira.entities.Game;
+import br.dev.andreferreira.grpcgameserver.config.DBConnection;
 import java.util.List;
 
 public class GameRepositoryImpl implements  GameRepository {
 
-  public GameRepositoryImpl() {
-  }
-
   @Override
   public List<Game> findAll() {
-    return null;
+    return DBConnection.getEntityManager()
+        .createNamedQuery("Game.findAll")
+        .getResultList();
   }
 
 }
