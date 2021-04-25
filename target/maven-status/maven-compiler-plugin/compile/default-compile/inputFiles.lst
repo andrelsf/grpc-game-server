@@ -1,3 +1,6 @@
+/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/config/DBConnection.java
 /home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/GrpcGameServerApplication.java
-/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/services/GameServerImpl.java
-/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/services/GameServer.java
+/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/repositories/GameRepository.java
+/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/repositories/GameRepositoryImpl.java
+/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/services/GameService.java
+/home/andreferreira/IdeaProjects/grpc-game-server/src/main/java/br/dev/andreferreira/grpcgameserver/services/GameServiceImpl.java

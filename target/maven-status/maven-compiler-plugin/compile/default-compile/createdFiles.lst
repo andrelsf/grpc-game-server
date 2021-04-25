@@ -1,3 +1,4 @@
-br/dev/andreferreira/grpcgameserver/services/GameServerImpl.class
-br/dev/andreferreira/grpcgameserver/services/GameServer.class
 br/dev/andreferreira/grpcgameserver/GrpcGameServerApplication.class
+br/dev/andreferreira/grpcgameserver/config/DBConnection.class
+br/dev/andreferreira/grpcgameserver/repositories/GameRepository.class
+br/dev/andreferreira/grpcgameserver/repositories/GameRepositoryImpl.class
