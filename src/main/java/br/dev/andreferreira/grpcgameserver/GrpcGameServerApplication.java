@@ -18,6 +18,7 @@ public class GrpcGameServerApplication {
     Server gRPCGameServer = ServerBuilder
         .forPort(PORT)
           .addService(new GameService(service))
+          .addService(new GameService(service))
         .build();
 
     gRPCGameServer.start();

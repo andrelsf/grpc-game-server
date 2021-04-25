@@ -10,7 +10,29 @@ public class GameRepositoryImpl implements  GameRepository {
   public List findAll() {
     return DBConnection.getEntityManager()
         .createNamedQuery("Game.findAll")
+        .setMaxResults(50)
         .getResultList();
+  }
+
+  @Override
+  public Game save(Game game) {
+    try {
+      DBConnection.beginTransaction();
+
+      Game gameSaved = DBConnection.getEntityManager().merge(game);
+      DBConnection.commit();
+
+      return gameSaved;
+    } catch (RuntimeException ex) {
+      if (DBConnection.getEntityManager() != null &&
+          DBConnection.getEntityManager().isOpen()) {
+        DBConnection.rollback();
+      }
+
+      throw ex;
+    } finally {
+      DBConnection.closeEntityManager();
+    }
   }
 
 }

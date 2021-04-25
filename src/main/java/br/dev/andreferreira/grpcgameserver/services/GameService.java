@@ -5,6 +5,7 @@ import static br.dev.andreferreira.entities.Platform.PS4;
 import br.dev.andreferreira.entities.Platform;
 import br.dev.andreferreira.grpcgameserver.entities.Game;
 import br.dev.andreferreira.grpcgameserver.exceptions.GameNotFoundException;
+import br.dev.andreferreira.services.GameRequest;
 import br.dev.andreferreira.services.GameResponse;
 import br.dev.andreferreira.services.GameServiceGrpc.GameServiceImplBase;
 import com.google.protobuf.Empty;
@@ -45,6 +46,14 @@ public class GameService extends GameServiceImplBase {
     GameResponse gamesResponse = GameResponse.newBuilder().addAllGame(listGames).build();
 
     responseObserver.onNext(gamesResponse);
+    responseObserver.onCompleted();
+  }
+
+  @Override
+  public void createNewGame(GameRequest request,
+      StreamObserver<br.dev.andreferreira.entities.Game> responseObserver) {
+    Game newGame = service.createNewGame(request);
+    responseObserver.onNext(newGame.toGameResponse());
     responseObserver.onCompleted();
   }
 }

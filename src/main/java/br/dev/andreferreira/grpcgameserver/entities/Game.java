@@ -1,6 +1,7 @@
 package br.dev.andreferreira.grpcgameserver.entities;
 
 import br.dev.andreferreira.entities.Platform;
+import br.dev.andreferreira.services.GameRequest;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +51,13 @@ public class Game implements Serializable {
   private Double price;
 
   public Game () {
+  }
+
+  public Game (GameRequest request) {
+    this.name = request.getName();
+    this.description = request.getDescription();
+    this.platform = request.getPlatform();
+    this.price = request.getPrice();
   }
 
   @Override
