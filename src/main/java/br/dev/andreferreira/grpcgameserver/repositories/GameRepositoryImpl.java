@@ -3,6 +3,7 @@ package br.dev.andreferreira.grpcgameserver.repositories;
 import br.dev.andreferreira.grpcgameserver.config.DBConnection;
 import br.dev.andreferreira.grpcgameserver.entities.Game;
 import java.util.List;
+import java.util.Optional;
 
 public class GameRepositoryImpl implements  GameRepository {
 
@@ -33,6 +34,11 @@ public class GameRepositoryImpl implements  GameRepository {
     } finally {
       DBConnection.closeEntityManager();
     }
+  }
+
+  @Override
+  public Optional<Game> findById(long gameId) {
+    return Optional.ofNullable(DBConnection.getEntityManager().find(Game.class, gameId));
   }
 
 }
