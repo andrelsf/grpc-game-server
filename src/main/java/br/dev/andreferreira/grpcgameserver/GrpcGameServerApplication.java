@@ -1,6 +1,6 @@
 package br.dev.andreferreira.grpcgameserver;
 
-import br.dev.andreferreira.grpcgameserver.services.GameServer;
+import br.dev.andreferreira.grpcgameserver.services.GameService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class GrpcGameServerApplication {
 
     Server gRPCGameServer = ServerBuilder
         .forPort(PORT)
-          .addService(new GameServer())
+          .addService(new GameService())
         .build();
 
     gRPCGameServer.start();
